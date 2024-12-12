@@ -21,14 +21,8 @@ namespace Coindesk.Controllers
         /// <returns>匯率資料</returns>
         [HttpGet]
         public List<Currency> Get(string? currencyType)
-        {
-            var currency = context.Currency.AsQueryable();
-
-            if (!string.IsNullOrWhiteSpace(currencyType))
-                currency = currency.Where(n => n.Type == currencyType);
-
-            return currency.OrderBy(n => n.Type).ToList();
-        }
+            => string.IsNullOrWhiteSpace(currencyType) ? context.Currency.OrderBy(n => n.Type).ToList()
+                                                       : context.Currency.Where(n => n.Type == currencyType).ToList();
 
         /// <summary>新增匯率資料</summary>
         /// <param name="currency">匯率資料</param>
@@ -70,9 +64,10 @@ namespace Coindesk.Controllers
             if(string.IsNullOrWhiteSpace(currencyType))
                 throw new ArgumentNullException(nameof(currencyType));
 
-            var count = context.Currency.Where(n => n.Type == currencyType).ExecuteDelete();
-            if (count == 0)
-                throw new InvalidOperationException($"指定的幣別 {currencyType} 不存在");
+            var element = context.Currency.SingleOrDefault(n => n.Type == currencyType) 
+                          ?? throw new InvalidOperationException($"指定的幣別 {currencyType} 不存在");
+
+            var count = context.Currency.Remove(element);
             context.SaveChanges();
         }
     }
