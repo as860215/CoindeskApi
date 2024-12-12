@@ -12,6 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<BloggingContext>(options => options.UseSqlServer("Server=localhost;Database=Coindesk;Integrated Security=True;TrustServerCertificate=true"));
 builder.Services.AddHttpClient();
+builder.Services.AddExceptionHandler<MainExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 builder.Host.UseNLog();
 
@@ -25,6 +27,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<LoggingMiddleware>();
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 
