@@ -44,7 +44,7 @@ public class CoindeskTest
         result.Bpi!["USD"].Description.Should().Be("我是美金唷");
         result.Bpi!["USD"].Rate.Should().Be(999888.777m);
         result.Bpi!["GBP"].RateText.Should().Be("79,277.927");
-        result.Bpi!["XXX"].Description.Should().Be("啊啊啊啊啊啊");
+        result.Bpi!["XXX"].Description.Should().Be("啊啊啊啊啊啊我是誰");
         result.Bpi!["XXX"].Currency.Should().Be("AuA");
         result.Bpi!["JPY"].Symbol.Should().Be("Y");
     }

@@ -32,7 +32,7 @@ public class FakeHttpMessageHandler : HttpMessageHandler
                                                   ""code"": ""AuA"",
                                                   ""symbol"": ""aaaaaaaaaa"",
                                                   ""rate"": ""123"",
-                                                  ""description"": ""啊啊啊啊啊啊"",
+                                                  ""description"": ""啊啊啊啊啊啊我是誰"",
                                                   ""rate_float"": 123
                                                 },
                                                 ""JPY"": {
