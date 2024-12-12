@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http;
 using System.Text.Json;
 
 namespace Coindesk.Controllers
@@ -25,11 +24,19 @@ namespace Coindesk.Controllers
         {
             const string url = "https://api.coindesk.com/v1/bpi/currentprice.json";
             using var client = clientFactory.CreateClient();
-            logger.LogInformation("[GetCoindesk][Http Get] start. url: {url}", url);
-            var result = client.GetAsync(url).GetAwaiter().GetResult();
-            var resultJson = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            logger.LogInformation("[GetCoindesk][Http Get] end. url: {url} | result: {result}", url, resultJson);
-            return JsonSerializer.Deserialize<CoindeskResponse>(resultJson);
+            try
+            {
+                logger.LogInformation("[GetCoindesk][Http Get] start. url: {url}", url);
+                var result = client.GetAsync(url).GetAwaiter().GetResult();
+                var resultJson = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                logger.LogInformation("[GetCoindesk][Http Get] end. url: {url} | result: {result}", url, resultJson);
+                return JsonSerializer.Deserialize<CoindeskResponse>(resultJson);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "[GetCoindesk] Http client get result fail.");
+                throw new InvalidOperationException("取得Coindesk資訊失敗，請稍後再試。");
+            }
         }
 
         /// <summary>取得Coindesk更新時間</summary>
