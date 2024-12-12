@@ -23,9 +23,12 @@ namespace Coindesk.Controllers
         [HttpGet]
         public CoindeskResponse? GetCoindesk()
         {
+            const string url = "https://api.coindesk.com/v1/bpi/currentprice.json";
             using var client = clientFactory.CreateClient();
-            var result = client.GetAsync("https://api.coindesk.com/v1/bpi/currentprice.json").GetAwaiter().GetResult();
+            logger.LogInformation("[GetCoindesk][Http Get] start. url: {url}", url);
+            var result = client.GetAsync(url).GetAwaiter().GetResult();
             var resultJson = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            logger.LogInformation("[GetCoindesk][Http Get] end. url: {url} | result: {result}", url, resultJson);
             return JsonSerializer.Deserialize<CoindeskResponse>(resultJson);
         }
 
