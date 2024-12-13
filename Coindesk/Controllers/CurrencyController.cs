@@ -32,7 +32,7 @@ namespace Coindesk.Controllers
             ArgumentNullException.ThrowIfNull(currency);
 
             if (context.Currency.Any(n => n.Type == currency.Type))
-                throw new InvalidOperationException($"指定的幣別 {currency.Type} 已存在");
+                throw new BusinessException($"指定的幣別 {currency.Type} 已存在");
 
             currency.LastUpdateDate = DateTimeOffset.Now;
 
@@ -48,7 +48,7 @@ namespace Coindesk.Controllers
             ArgumentNullException.ThrowIfNull(currency);
 
             if (!context.Currency.Any(n => n.Type == currency.Type))
-                throw new InvalidOperationException($"指定的幣別 {currency.Type} 不存在");
+                throw new BusinessException($"指定的幣別 {currency.Type} 不存在");
 
             currency.LastUpdateDate = DateTimeOffset.Now;
 
@@ -65,7 +65,7 @@ namespace Coindesk.Controllers
                 throw new ArgumentNullException(nameof(currencyType));
 
             var element = context.Currency.SingleOrDefault(n => n.Type == currencyType) 
-                          ?? throw new InvalidOperationException($"指定的幣別 {currencyType} 不存在");
+                          ?? throw new BusinessException($"指定的幣別 {currencyType} 不存在");
 
             var count = context.Currency.Remove(element);
             context.SaveChanges();

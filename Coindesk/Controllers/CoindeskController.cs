@@ -29,7 +29,6 @@ namespace Coindesk.Controllers
             var result = client.GetAsync(url).GetAwaiter().GetResult();
             var resultJson = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             logger.LogInformation("[GetCoindesk][Http Get] end. url: {url} | result: {result}", url, resultJson);
-            throw new NotImplementedException();
             return JsonSerializer.Deserialize<CoindeskResponse>(resultJson);
         }
 
