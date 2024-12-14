@@ -11,7 +11,7 @@ using Xunit;
 namespace Coindesk.Test;
 public class MockCurrency : MockControllerBase
 {
-    public override void Create(Mock<BloggingContext> context)
+    public override void Create(Mock<DatabaseContext> context)
     {
         var currencies = new List<Currency>
         {

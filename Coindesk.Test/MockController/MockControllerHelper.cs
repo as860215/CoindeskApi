@@ -10,7 +10,7 @@ public static class MockControllerHelper
     /// <typeparam name="T"></typeparam>
     /// <param name="context">上下文</param>
     /// <returns>上下文</returns>
-    public static Mock<BloggingContext> AddContext<T>(this Mock<BloggingContext> context) where T : class
+    public static Mock<DatabaseContext> AddContext<T>(this Mock<DatabaseContext> context) where T : class
     {
         MockControllerBase? mockController = null;
         if (typeof(T) == typeof(Currency))

@@ -29,7 +29,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var databaseConnection = builder.Configuration.GetSection("Database");
-builder.Services.AddDbContext<BloggingContext>(options => options.UseSqlServer(databaseConnection.Value));
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(databaseConnection.Value));
 builder.Services.AddHttpClient();
 builder.Services.AddExceptionHandler<MainExceptionHandler>();
 builder.Services.AddProblemDetails();

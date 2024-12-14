@@ -15,7 +15,7 @@ public class CoindeskTest_WithClient
     public CoindeskTest_WithClient()
     {
         var mockLogger = new Mock<ILogger<CoindeskController>>();
-        var mockContext = new Mock<BloggingContext>();
+        var mockContext = new Mock<DatabaseContext>();
 
         mockContext.AddContext<Currency>();
 

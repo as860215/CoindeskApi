@@ -8,10 +8,10 @@ namespace Coindesk.Controllers
     public class CoindeskController : ControllerBase
     {
         private readonly ILogger<CoindeskController> logger;
-        private readonly BloggingContext context;
+        private readonly DatabaseContext context;
         private readonly IHttpClientFactory clientFactory;
 
-        public CoindeskController(ILogger<CoindeskController> logger, BloggingContext context, IHttpClientFactory clientFactory)
+        public CoindeskController(ILogger<CoindeskController> logger, DatabaseContext context, IHttpClientFactory clientFactory)
         {
             this.logger = logger;
             this.context = context;

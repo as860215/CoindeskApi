@@ -9,12 +9,12 @@ namespace Coindesk.Controllers
     public class CurrencyController : ControllerBase
     {
         private readonly ILogger<CurrencyController> logger;
-        private readonly BloggingContext context;
+        private readonly DatabaseContext context;
         private readonly IStringLocalizer localizer;
         private const string CurrencyNotFound = nameof(CurrencyNotFound);
         private const string CurrencyAlreadyExists = nameof(CurrencyAlreadyExists);
 
-        public CurrencyController(ILogger<CurrencyController> logger, BloggingContext context, IStringLocalizer<CurrencyController> localizer)
+        public CurrencyController(ILogger<CurrencyController> logger, DatabaseContext context, IStringLocalizer<CurrencyController> localizer)
         {
             this.logger = logger;
             this.context = context;

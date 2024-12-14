@@ -17,7 +17,7 @@ public class CurrencyTest
     public CurrencyTest()
     {
         var mockLogger = new Mock<ILogger<CurrencyController>>();
-        var mockContext = new Mock<BloggingContext>();
+        var mockContext = new Mock<DatabaseContext>();
 
         mockContext.AddContext<Currency>();
 

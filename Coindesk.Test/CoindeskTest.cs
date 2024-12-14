@@ -16,7 +16,7 @@ public class CoindeskTest
     public CoindeskTest()
     {
         var mockLogger = new Mock<ILogger<CoindeskController>>();
-        var mockContext = new Mock<BloggingContext>();
+        var mockContext = new Mock<DatabaseContext>();
         var mockHttpClientFactory = new Mock<IHttpClientFactory>();
 
         mockHttpClientFactory.Setup(factory => factory.CreateClient(It.IsAny<string>())).Returns(new HttpClient(new FakeHttpMessageHandler()));
