@@ -18,14 +18,12 @@ public class AuthorizationFilter : IAsyncActionFilter
         var authorization = context.HttpContext.Request.Headers.Authorization.ToString();
         const string bearerTokenTitle = "Bearer ";
         const string invalidMessage = "身分驗證失敗";
+        var token = authorization;
 
         if (authorization.StartsWith(bearerTokenTitle))
-        {
-            var token = authorization.Substring(bearerTokenTitle.Length).Trim();
-            if(!jwtAuth.AuthorizationToken(token))
-                throw new BusinessException(invalidMessage);
-        }
-        else
+            token = authorization.Substring(bearerTokenTitle.Length).Trim();
+
+        if (!jwtAuth.AuthorizationToken(token))
             throw new BusinessException(invalidMessage);
 
         await next();
