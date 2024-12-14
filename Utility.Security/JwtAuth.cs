@@ -26,14 +26,14 @@ namespace Utility.Security
 
         /// <summary>產生Token</summary>
         /// <param name="identification">識別項</param>
-        /// <param name="timeout">到期時間（NULL代表無限期）</param>
+        /// <param name="timeout">到期秒數（NULL代表無限期）</param>
         public string GenerateToken(string identification, int? timeout = null)
         {
             ArgumentNullException.ThrowIfNull(identification);
 
             var payload = new Dictionary<string, string>
             {
-                { identificationTag, identification }
+                { identificationTag, EncryptionHelper.Encrypt(identification) }
             };
             if(timeout != null)
                 payload.Add(expirationTimeTag, DateTimeOffset.Now.AddSeconds(timeout.Value).ToString());
