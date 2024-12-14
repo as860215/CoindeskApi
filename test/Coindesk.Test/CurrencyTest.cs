@@ -1,6 +1,7 @@
 ﻿using Coindesk.Controllers;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Moq.EntityFrameworkCore;
@@ -18,10 +19,11 @@ public class CurrencyTest
     {
         var mockLogger = new Mock<ILogger<CurrencyController>>();
         var mockContext = new Mock<DatabaseContext>();
+        var mockLocalizer = MockLocalizerHelper.Create<CurrencyController>();
 
         mockContext.AddContext<Currency>();
 
-        currencyController = new CurrencyController(mockLogger.Object, mockContext.Object, null);
+        currencyController = new CurrencyController(mockLogger.Object, mockContext.Object, mockLocalizer.Object);
     }
 
     [Theory]
@@ -44,7 +46,7 @@ public class CurrencyTest
 
     [Fact]
     public void AddCurrency_But_Type_Has_Already_Exists()
-        => FluentActions.Invoking(() => currencyController.Add(new Currency("USD", "美金"))).Should().Throw<InvalidOperationException>();
+        => FluentActions.Invoking(() => currencyController.Add(new Currency("USD", "美金"))).Should().Throw<BusinessException>();
 
     [Fact]
     public void AddCurrency()
@@ -66,7 +68,7 @@ public class CurrencyTest
 
     [Fact]
     public void ModifyCurrency_But_Type_Has_Already_Exists()
-        => FluentActions.Invoking(() => currencyController.Modify(new Currency("TWD", "新台幣"))).Should().Throw<InvalidOperationException>();
+        => FluentActions.Invoking(() => currencyController.Modify(new Currency("TWD", "新台幣"))).Should().Throw<BusinessException>();
 
     [Fact]
     public void ModifyCurrency()
@@ -88,7 +90,7 @@ public class CurrencyTest
 
     [Fact]
     public void DeleteCurrency_But_Type_Has_Already_Exists()
-        => FluentActions.Invoking(() => currencyController.Delete("TWD")).Should().Throw<InvalidOperationException>();
+        => FluentActions.Invoking(() => currencyController.Delete("TWD")).Should().Throw<BusinessException>();
 
     [Fact]
     public void DeleteCurrency()

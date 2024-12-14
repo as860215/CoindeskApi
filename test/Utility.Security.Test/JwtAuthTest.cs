@@ -10,7 +10,7 @@ public class JwtAuthTest
     public void GenerateToken()
     {
         var result = new JwtAuth(key).GenerateToken("啊啊啊啊啊啊啊啊");
-        result.Should().Be("eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZGVudGlmaWNhdGlvbiI6IuWViuWViuWViuWViuWViuWViuWViuWViiJ9.Fq55p1aTuNsw5SnGaa6uY2MAFK8xMigWREWbS7fTW8Y6T7LEG997c2fiQTKbILj2QTsc9l_P3ttXLuHpYC0NeA");
+        result.Should().Be("eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZGVudGlmaWNhdGlvbiI6InNIUzBpMHhUTmRidWJqSDh0L1VPOG9PWXdtMWg0N2FEaE1QN2tFU1MwVVU9In0.mSBLDTRUNXktfQRdg9a5dBisWUyMmW_u33Kg_IDrys4icxKZGQNfrAQNAgRnXoCS1EuvaO4jshSguH9Eeh8qfQ");
     }
 
     [Fact]
