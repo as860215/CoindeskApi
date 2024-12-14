@@ -1,15 +1,8 @@
-﻿using Coindesk.Controllers;
-using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Moq;
+﻿using Moq;
 using Moq.EntityFrameworkCore;
-using Namotion.Reflection;
-using System.Linq.Expressions;
-using Xunit;
 
 namespace Coindesk.Test;
-public class MockCurrency : MockControllerBase
+public class MockCurrency : MockContextBase
 {
     public override void Create(Mock<DatabaseContext> context)
     {
