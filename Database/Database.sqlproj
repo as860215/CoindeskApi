@@ -60,4 +60,7 @@
   <ItemGroup>
     <Build Include="Currency.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Initialization_patch.sql" />
+  </ItemGroup>
 </Project>
