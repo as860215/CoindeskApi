@@ -6,18 +6,29 @@ namespace Utility.Security
     /// <summary>JWT授權機制</summary>
     public class JwtAuth
     {
+        /// <summary>認證鍵值</summary>
+        private string Key { get; set; }
+
+        /// <summary>認證鍵值(編碼)</summary>
+        private byte[] KeyBytes { get; set; }
+
+        public JwtAuth(string key)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(key);
+            Key = key;
+            KeyBytes = Encoding.UTF8.GetBytes(Key);
+        }
+
         /// <summary>到期時間</summary>
         private const string expirationTimeTag = "Exp";
         /// <summary>識別項</summary>
         private const string identificationTag = "Identification";
 
         /// <summary>產生Token</summary>
-        /// <param name="key">鍵值</param>
         /// <param name="identification">識別項</param>
         /// <param name="timeout">到期時間（NULL代表無限期）</param>
-        public string GenerateToken(string key, string identification, int? timeout = null)
+        public string GenerateToken(string identification, int? timeout = null)
         {
-            ArgumentNullException.ThrowIfNull(key);
             ArgumentNullException.ThrowIfNull(identification);
 
             var payload = new Dictionary<string, string>
@@ -27,23 +38,22 @@ namespace Utility.Security
             if(timeout != null)
                 payload.Add(expirationTimeTag, DateTimeOffset.Now.AddSeconds(timeout.Value).ToString());
 
-            var token = JWT.Encode(payload, Encoding.UTF8.GetBytes(key), JwsAlgorithm.HS512);
+            var token = JWT.Encode(payload, KeyBytes, JwsAlgorithm.HS512);
             return token;
         }
 
         /// <summary>驗證Token</summary>
-        /// <param name="key">鍵值</param>
         /// <param name="token">Token</param>
         /// <returns>是否驗證成功</returns>
-        public bool AuthorizationToken(string key, string token)
+        public bool AuthorizationToken(string token)
         {
-            if (key == null || token == null) return false;
+            if (token == null) return false;
 
             var jwtObject = new Dictionary<string, string>();
 
             try
             {
-                jwtObject = JWT.Decode<Dictionary<string, string>>(token, Encoding.UTF8.GetBytes(key), JwsAlgorithm.HS512);
+                jwtObject = JWT.Decode<Dictionary<string, string>>(token, KeyBytes, JwsAlgorithm.HS512);
             }
             catch
             {
