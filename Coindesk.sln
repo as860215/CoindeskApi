@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coindesk", "Coindesk\Coinde
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{BD49C877-458F-48CC-B284-43C64E8A8B85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coindesk.Test", "Coindesk.Test\Coindesk.Test.csproj", "{FB1646D5-AD30-4A8A-9006-DFE6FD11416F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coindesk.Test", "test\Coindesk.Test\Coindesk.Test.csproj", "{FB1646D5-AD30-4A8A-9006-DFE6FD11416F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Security.Test", "Utility.Security.Test\Utility.Security.Test.csproj", "{88A7688E-9913-4B98-81DA-8EE15F0E3837}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Security.Test", "test\Utility.Security.Test\Utility.Security.Test.csproj", "{88A7688E-9913-4B98-81DA-8EE15F0E3837}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Security", "Utility.Security\Utility.Security.csproj", "{CB6729B8-FEF8-4976-82A3-5E8E293833EC}"
 EndProject

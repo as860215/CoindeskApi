@@ -21,7 +21,7 @@ public class CurrencyTest
 
         mockContext.AddContext<Currency>();
 
-        currencyController = new CurrencyController(mockLogger.Object, mockContext.Object);
+        currencyController = new CurrencyController(mockLogger.Object, mockContext.Object, null);
     }
 
     [Theory]
