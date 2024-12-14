@@ -1,12 +1,15 @@
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NLog.Web;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers(option => option.Filters.Add<AuthorizationFilter>());
+builder.Services.AddLocalization(option => option.ResourcesPath = "Resources");
+builder.Services.AddControllers(option => option.Filters.Add<AuthorizationFilter>())
+                .AddViewLocalization()
+                .AddDataAnnotationsLocalization();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -41,6 +44,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+var supportedCultures = new[] { new CultureInfo("zh-tw"), new CultureInfo("en"), };
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("zh-tw"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures
+});
 
 app.UseMiddleware<LoggingMiddleware>();
 app.UseExceptionHandler();

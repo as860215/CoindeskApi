@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace Coindesk.Controllers
 {
@@ -9,11 +10,15 @@ namespace Coindesk.Controllers
     {
         private readonly ILogger<CurrencyController> logger;
         private readonly BloggingContext context;
+        private readonly IStringLocalizer localizer;
+        private const string CurrencyNotFound = nameof(CurrencyNotFound);
+        private const string CurrencyAlreadyExists = nameof(CurrencyAlreadyExists);
 
-        public CurrencyController(ILogger<CurrencyController> logger, BloggingContext context)
+        public CurrencyController(ILogger<CurrencyController> logger, BloggingContext context, IStringLocalizer<CurrencyController> localizer)
         {
             this.logger = logger;
             this.context = context;
+            this.localizer = localizer;
         }
 
         /// <summary>取得匯率資料</summary>
@@ -32,7 +37,7 @@ namespace Coindesk.Controllers
             ArgumentNullException.ThrowIfNull(currency);
 
             if (context.Currency.Any(n => n.Type == currency.Type))
-                throw new BusinessException($"指定的幣別 {currency.Type} 已存在");
+                throw new BusinessException(string.Format(localizer[CurrencyAlreadyExists], currency.Type));
 
             currency.LastUpdateDate = DateTimeOffset.Now;
 
@@ -48,7 +53,7 @@ namespace Coindesk.Controllers
             ArgumentNullException.ThrowIfNull(currency);
 
             if (!context.Currency.Any(n => n.Type == currency.Type))
-                throw new BusinessException($"指定的幣別 {currency.Type} 不存在");
+                throw new BusinessException(string.Format(localizer[CurrencyNotFound], currency.Type));
 
             currency.LastUpdateDate = DateTimeOffset.Now;
 
@@ -61,11 +66,11 @@ namespace Coindesk.Controllers
         [HttpDelete]
         public void Delete(string currencyType)
         {
-            if(string.IsNullOrWhiteSpace(currencyType))
+            if (string.IsNullOrWhiteSpace(currencyType))
                 throw new ArgumentNullException(nameof(currencyType));
 
             var element = context.Currency.SingleOrDefault(n => n.Type == currencyType) 
-                          ?? throw new BusinessException($"指定的幣別 {currencyType} 不存在");
+                          ?? throw new BusinessException(string.Format(localizer[CurrencyNotFound], currencyType));
 
             var count = context.Currency.Remove(element);
             context.SaveChanges();
