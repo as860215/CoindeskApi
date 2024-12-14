@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using NLog.Extensions.Logging;
 using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +9,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<BloggingContext>(options => options.UseSqlServer("Server=localhost;Database=Coindesk;Integrated Security=True;TrustServerCertificate=true"));
+
+var databaseConnection = builder.Configuration.GetSection("Database");
+builder.Services.AddDbContext<BloggingContext>(options => options.UseSqlServer(databaseConnection.Value));
 builder.Services.AddHttpClient();
 builder.Services.AddExceptionHandler<MainExceptionHandler>();
 builder.Services.AddProblemDetails();
