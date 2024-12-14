@@ -32,14 +32,25 @@ namespace Utility.Security
         }
 
         /// <summary>驗證Token</summary>
-        /// <param name="key"></param>
-        /// <param name="token"></param>
-        /// <returns></returns>
+        /// <param name="key">鍵值</param>
+        /// <param name="token">Token</param>
+        /// <returns>是否驗證成功</returns>
         public bool AuthorizationToken(string key, string token)
         {
             if (key == null || token == null) return false;
 
-            var jwtObject = JWT.Decode<Dictionary<string, string>>(token, Encoding.UTF8.GetBytes(key), JwsAlgorithm.HS512);
+            var jwtObject = new Dictionary<string, string>();
+
+            try
+            {
+                jwtObject = JWT.Decode<Dictionary<string, string>>(token, Encoding.UTF8.GetBytes(key), JwsAlgorithm.HS512);
+            }
+            catch
+            {
+                // 不合規的token亦視為驗證失敗
+                return false;
+            }
+
             if (!jwtObject.ContainsKey(identificationTag))
                 return false;
 
