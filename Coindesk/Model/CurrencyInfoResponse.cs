@@ -8,5 +8,5 @@ public class CurrencyInfoResponse
     public string? Name { get; set; }
 
     /// <summary>匯率</summary>
-    public decimal? Rate{ get; set; }
+    public decimal? Rate { get; set; }
 }

@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using System.Text;
 using System.Text.Json;
 
 /// <summary>錯誤捕獲</summary>
@@ -17,7 +15,7 @@ public class MainExceptionHandler : IExceptionHandler
         ResponseBodyModel model;
         // 如果是 BusinessException 的話，將錯誤訊息往外拋
         // 否則 將錯誤訊息隱藏並記錄Log
-        if(exception is BusinessException)
+        if (exception is BusinessException)
         {
             model = new ResponseBodyModel(BusinessErrorCode, exception.Message);
         }

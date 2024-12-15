@@ -1,7 +1,5 @@
-﻿using Coindesk.Controllers;
-using Microsoft.Extensions.Localization;
+﻿using Microsoft.Extensions.Localization;
 using Moq;
-using System.Net;
 
 namespace Coindesk.Test;
 public static class MockLocalizerHelper

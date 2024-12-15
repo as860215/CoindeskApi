@@ -35,7 +35,7 @@ namespace Coindesk.Controllers
         /// <summary>取得Coindesk更新時間</summary>
         /// <remarks>更新時間（yyyy/MM/dd HH:mm:ss）</remarks>
         [HttpGet]
-        public string? GetCoindeskUpdateTime()  => GetCoindesk()?.Time?.UpdateTimeIso?.ToString("yyyy/MM/dd HH:mm:ss");
+        public string? GetCoindeskUpdateTime() => GetCoindesk()?.Time?.UpdateTimeIso?.ToString("yyyy/MM/dd HH:mm:ss");
 
         /// <summary>取得Coindesk幣別匯率資訊</summary>
         /// <returns>幣別匯率資訊</returns>

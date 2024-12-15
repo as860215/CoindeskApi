@@ -35,7 +35,7 @@ namespace Utility.Security
             {
                 { identificationTag, EncryptionHelper.Encrypt(identification) }
             };
-            if(timeout != null)
+            if (timeout != null)
                 payload.Add(expirationTimeTag, DateTimeOffset.Now.AddSeconds(timeout.Value).ToString());
 
             var token = JWT.Encode(payload, KeyBytes, JwsAlgorithm.HS512);

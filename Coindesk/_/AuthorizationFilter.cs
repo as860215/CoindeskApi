@@ -6,7 +6,7 @@ using Utility.Security;
 public class AuthorizationFilter : IAsyncActionFilter
 {
     private JwtAuth? _jwtAuth = null;
-    private JwtAuth jwtAuth => LazyInitializer.EnsureInitialized(ref  _jwtAuth, () => new JwtAuth(SecurityDefine.AuthKey));
+    private JwtAuth jwtAuth => LazyInitializer.EnsureInitialized(ref _jwtAuth, () => new JwtAuth(SecurityDefine.AuthKey));
 
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {

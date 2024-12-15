@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
 namespace Coindesk.Controllers
@@ -69,7 +68,7 @@ namespace Coindesk.Controllers
             if (string.IsNullOrWhiteSpace(currencyType))
                 throw new ArgumentNullException(nameof(currencyType));
 
-            var element = context.Currency.SingleOrDefault(n => n.Type == currencyType) 
+            var element = context.Currency.SingleOrDefault(n => n.Type == currencyType)
                           ?? throw new BusinessException(string.Format(localizer[CurrencyNotFound], currencyType));
 
             var count = context.Currency.Remove(element);

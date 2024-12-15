@@ -1,5 +1,4 @@
-﻿using Jose;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
 namespace Utility.Security

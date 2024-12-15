@@ -1,7 +1,6 @@
 ﻿using Coindesk.Controllers;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
 using Moq;
 using Xunit;
 

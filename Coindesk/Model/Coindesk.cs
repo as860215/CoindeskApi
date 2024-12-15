@@ -30,16 +30,16 @@ public class BpiDetail
 {
     [JsonPropertyName("code")]
     public string? Currency { get; set; }
-    
+
     [JsonPropertyName("symbol")]
     public string? Symbol { get; set; }
-    
+
     [JsonPropertyName("rate")]
     public string? RateText { get; set; }
-    
+
     [JsonPropertyName("description")]
     public string? Description { get; set; }
-    
+
     [JsonPropertyName("rate_float")]
     public decimal? Rate { get; set; }
 

@@ -1,12 +1,7 @@
 ﻿using Coindesk.Controllers;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Moq.EntityFrameworkCore;
-using Namotion.Reflection;
-using System.Linq.Expressions;
 using Xunit;
 
 #pragma warning disable CS8625 // 無法將 null 常值轉換成不可為 Null 的參考型別。單元測試用
@@ -54,7 +49,7 @@ public class CurrencyTest
         var currency = new Currency("TWD", "新台幣");
         currencyController.Add(currency);
 
-        
+
         var result = currencyController.Get(currency.Type);
         result.Should().HaveCount(1);
         result.First().Type.Should().Be(currency.Type);
